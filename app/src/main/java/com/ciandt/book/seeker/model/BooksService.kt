@@ -1,22 +1,16 @@
 package com.ciandt.book.seeker.model
 
+import com.ciandt.book.seeker.di.DaggerApiComponent
 import io.reactivex.Single
-import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
-import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Inject
 
 class BooksService {
 
-    private val BASE_URL = "https://itunes.apple.com/"
-    private val api: BooksApi
+    @Inject
+    lateinit var api: BooksApi
 
-    init {
-        api = Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .build()
-            .create(BooksApi::class.java)
+    init{
+        DaggerApiComponent.create().inject(this)
     }
 
     fun getApiResponse(): Single<ApiResponse> {
