@@ -7,6 +7,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.ciandt.book.seeker.R
 import com.ciandt.book.seeker.viewmodel.ListViewModel
 import kotlinx.android.synthetic.main.activity_main.*
@@ -26,6 +27,15 @@ class MainActivity : AppCompatActivity() {
         booksList.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = booksAdapter
+        }
+
+        SwipeRefreshLayout.OnRefreshListener{
+            viewModel.refresh()
+        }
+
+        swipeRefreshLayout.setOnRefreshListener {
+            swipeRefreshLayout.isRefreshing = false
+            viewModel.refresh()
         }
 
         observeViewModel()
