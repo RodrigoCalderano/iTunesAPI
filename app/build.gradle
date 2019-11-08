@@ -3,6 +3,8 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'jacoco'
 apply plugin: 'io.gitlab.arturbosch.detekt'
+apply plugin: 'kotlin-kapt'
+
 
 android {
     compileSdkVersion 29
@@ -50,6 +52,14 @@ android {
     }
 }
 
+def lifeCycleExtensionsVersion = '1.1.1'
+def supportVersion = '28.0.0'
+def retrofitVersion = '2.5.0'
+def daggerVersion = '2.25.2'
+def glideVersion = '4.8.0'
+def mockitoVersion = '2.11.0'
+def rxJavaVersion = '2.0.1'
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     // androidx dependencies
@@ -66,23 +76,39 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.0'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.0'
 
-    // other dependencies
-    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
-    implementation 'com.squareup.okhttp3:logging-interceptor:3.13.1'
-    implementation 'com.squareup.retrofit2:converter-moshi:2.5.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
+    // Retrofit
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
 
-    // test dependencies
-    testImplementation 'androidx.test:core:1.2.0'
+    // RxJava
+    implementation "io.reactivex.rxjava2:rxjava:$rxJavaVersion"
+    implementation "io.reactivex.rxjava2:rxandroid:$rxJavaVersion"
+
+    // Dagger
+    implementation "com.google.dagger:dagger:$daggerVersion"
+    implementation "com.google.dagger:dagger-android-support:$daggerVersion"
+    kapt "com.google.dagger:dagger-compiler:$daggerVersion"
+    kapt "com.google.dagger:dagger-android-processor:$daggerVersion"
+
+    // Support
+    implementation "com.android.support:recyclerview-v7:$supportVersion"
+    implementation "com.android.support:appcompat-v7:$supportVersion"
+
+    // Glide
+    implementation "com.github.bumptech.glide:glide:$glideVersion"
+
+    // LifeCycle
+    implementation "android.arch.lifecycle:extensions:$lifeCycleExtensionsVersion"
+
+    // Testing
     testImplementation 'junit:junit:4.12'
-    testImplementation 'io.mockk:mockk:1.9.3'
-    testImplementation 'com.squareup.okhttp3:mockwebserver:3.9.1'
+    testImplementation "org.mockito:mockito-inline:$mockitoVersion"
+    testImplementation 'android.arch.core:core-testing:1.1.1'
 
-    // android test dependencies
-    androidTestImplementation 'androidx.test:core:1.2.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test:rules:1.2.0'
+    // espresso
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
     detektPlugins "io.gitlab.arturbosch.detekt:detekt-formatting:1.0.1"
 }

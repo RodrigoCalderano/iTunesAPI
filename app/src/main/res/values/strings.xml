@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">book-seeker-android</string>
+    <string name="loading_error_text">Ocorreu um erro ao atualizar a lista</string>
 </resources>
