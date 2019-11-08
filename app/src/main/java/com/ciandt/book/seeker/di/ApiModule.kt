@@ -1,6 +1,7 @@
 package com.ciandt.book.seeker.di
 
 import com.ciandt.book.seeker.model.BooksApi
+import com.ciandt.book.seeker.model.BooksService
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
@@ -20,5 +21,10 @@ class ApiModule {
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build()
             .create(BooksApi::class.java)
+    }
+
+    @Provides
+    fun provideBooksService(): BooksService {
+        return BooksService()
     }
 }

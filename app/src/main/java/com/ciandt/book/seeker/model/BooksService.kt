@@ -8,7 +8,6 @@ class BooksService {
 
     @Inject
     lateinit var api: BooksApi
-
     init{
         DaggerApiComponent.create().inject(this)
     }

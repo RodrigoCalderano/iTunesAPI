@@ -2,6 +2,7 @@ package com.ciandt.book.seeker.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.ciandt.book.seeker.di.DaggerApiComponent
 import com.ciandt.book.seeker.model.ApiResponse
 import com.ciandt.book.seeker.model.Book
 import com.ciandt.book.seeker.model.BooksService
@@ -9,10 +10,16 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
+import javax.inject.Inject
 
 class ListViewModel: ViewModel() {
 
-    private val booksService = BooksService()
+    @Inject
+    lateinit var booksService: BooksService
+    init {
+        DaggerApiComponent.create().inject(this)
+    }
+
     private val disposable = CompositeDisposable()
 
 
