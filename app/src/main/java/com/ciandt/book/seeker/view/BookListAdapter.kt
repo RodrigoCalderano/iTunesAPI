@@ -6,6 +6,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ciandt.book.seeker.R
 import com.ciandt.book.seeker.model.Book
+import com.ciandt.book.seeker.util.getProgressDrawable
+import com.ciandt.book.seeker.util.loadImage
 import kotlinx.android.synthetic.main.item_book.view.*
 
 class BookListAdapter(var books: ArrayList<Book>): RecyclerView.Adapter<BookListAdapter.BookViewHolder>() {
@@ -28,10 +30,15 @@ class BookListAdapter(var books: ArrayList<Book>): RecyclerView.Adapter<BookList
 
     class BookViewHolder(view: View): RecyclerView.ViewHolder(view) {
 
-        val bookName = view.book_name
+        private val imageView = view.imageView
+        private val bookName = view.book_name
+        private val author = view.author
+        private val progressDrawable = getProgressDrawable(view.context)
 
         fun bind(book: Book){
             bookName.text = book.name
+            author.text = book.author
+            imageView.loadImage(book.image1100, progressDrawable)
         }
     }
 }
