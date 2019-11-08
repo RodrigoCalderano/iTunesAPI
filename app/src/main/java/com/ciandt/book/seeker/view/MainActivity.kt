@@ -1,7 +1,8 @@
-package com.ciandt.book.seeker
+package com.ciandt.book.seeker.view
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.ciandt.book.seeker.R
 
 class MainActivity : AppCompatActivity() {
 
