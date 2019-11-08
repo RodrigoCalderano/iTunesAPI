@@ -2,9 +2,19 @@ package com.ciandt.book.seeker.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.ciandt.book.seeker.model.ApiResponse
 import com.ciandt.book.seeker.model.Book
+import com.ciandt.book.seeker.model.BooksService
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.observers.DisposableSingleObserver
+import io.reactivex.schedulers.Schedulers
 
 class ListViewModel: ViewModel() {
+
+    private val booksService = BooksService()
+    private val disposable = CompositeDisposable()
+
 
     val books = MutableLiveData<List<Book>>()
     val bookLoadError = MutableLiveData<Boolean>()
@@ -15,19 +25,29 @@ class ListViewModel: ViewModel() {
     }
 
     private fun fetchBooks(){
-        val mockData = listOf(
-            Book(name = "BookA", author = "Author A", description = "desc",
-                image160 = "Im160", image1100 = "Im1100"),
-            Book(name = "BookB", author = "Author B", description = "descb",
-                image160 = "Im160b", image1100 = "Im1100b"),
-            Book(name = "BookC", author = "Author C", description = "descc",
-                image160 = "Im160c", image1100 = "Im1100c"),
-            Book(name = "BookD", author = "Author D", description = "descd",
-                image160 = "Im160d", image1100 = "Im1100d")
-        )
+        loading.value = true
+        disposable.add(
+            booksService.getApiResponse()
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(object: DisposableSingleObserver <ApiResponse>(){
+                    override fun onSuccess(value: ApiResponse) {
+                        books.value = value.results
+                        bookLoadError.value = false
+                        loading.value = false
+                    }
 
-        bookLoadError.value = false
-        loading.value = false
-        books.value = mockData
+                    override fun onError(e: Throwable?) {
+                        bookLoadError.value = true
+                        loading.value = false
+                    }
+
+                })
+        )
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        disposable.clear()
     }
 }

@@ -33,7 +33,8 @@ class MainActivity : AppCompatActivity() {
 
     fun observeViewModel() {
         viewModel.books.observe(this, Observer {books ->
-            books?.let{ booksAdapter.updateBooks(it) }
+            books?.let{ booksAdapter.updateBooks(it)}
+            booksList.visibility = View.VISIBLE
         })
 
         viewModel.bookLoadError.observe(this, Observer { isError ->
