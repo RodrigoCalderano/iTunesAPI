@@ -2,9 +2,6 @@
 *.apk
 *.ap_
 
-# rodrigo files
-keystore.properties
-
 # files for the dex VM
 *.dex
 
