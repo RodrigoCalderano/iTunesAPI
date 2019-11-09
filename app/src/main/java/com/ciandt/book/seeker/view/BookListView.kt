@@ -8,20 +8,21 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ciandt.book.seeker.BuildConfig
 import com.ciandt.book.seeker.R
+import com.ciandt.book.seeker.adapter.BookListAdapter
 import com.ciandt.book.seeker.viewmodel.ListViewModel
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_book_list.*
 import com.microsoft.appcenter.AppCenter
 import com.microsoft.appcenter.analytics.Analytics
 import com.microsoft.appcenter.crashes.Crashes
 
-class MainActivity : AppCompatActivity() {
+class BookListView : AppCompatActivity() {
 
     private lateinit var viewModel: ListViewModel
     private val booksAdapter = BookListAdapter(arrayListOf())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_book_list)
 
         AppCenter.start(
             application, BuildConfig.APPCENTER_SECRET,

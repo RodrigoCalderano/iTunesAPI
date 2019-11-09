@@ -1,4 +1,4 @@
-package com.ciandt.book.seeker.view
+package com.ciandt.book.seeker.adapter
 
 import android.content.Intent
 import android.view.LayoutInflater
@@ -9,6 +9,7 @@ import com.ciandt.book.seeker.R
 import com.ciandt.book.seeker.model.Book
 import com.ciandt.book.seeker.util.getProgressDrawable
 import com.ciandt.book.seeker.util.loadImage
+import com.ciandt.book.seeker.view.BookDetailsActivity
 import kotlinx.android.synthetic.main.item_book.view.*
 
 class BookListAdapter(var books: ArrayList<Book>): RecyclerView.Adapter<BookListAdapter.BookViewHolder>() {
@@ -19,9 +20,10 @@ class BookListAdapter(var books: ArrayList<Book>): RecyclerView.Adapter<BookList
         notifyDataSetChanged()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = BookViewHolder(
-        LayoutInflater.from(parent.context).inflate(R.layout.item_book, parent, false)
-    )
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
+        BookViewHolder(
+            LayoutInflater.from(parent.context).inflate(R.layout.item_book, parent, false)
+        )
 
     override fun getItemCount() = books.size
 
