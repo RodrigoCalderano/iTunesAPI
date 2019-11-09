@@ -1,7 +1,9 @@
 package com.ciandt.book.seeker.view
 
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Html
 import com.ciandt.book.seeker.R
 import com.ciandt.book.seeker.util.getProgressDrawable
 import com.ciandt.book.seeker.util.loadImage
@@ -22,7 +24,10 @@ class BookDetailsActivity : AppCompatActivity() {
         val progressDrawable = getProgressDrawable(this)
         detailsTitle.text = name
         detailsAuthor.text = author
-        detailsDesc.text = description
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            detailsDesc.text = Html.fromHtml(description, Html.FROM_HTML_MODE_LEGACY).toString()
+        } else detailsDesc.text =  Html.fromHtml(description).toString()
+
         imageView.loadImage(image1100, progressDrawable)
     }
 }
