@@ -14,6 +14,7 @@ import kotlinx.android.synthetic.main.activity_book_list.*
 import com.microsoft.appcenter.AppCenter
 import com.microsoft.appcenter.analytics.Analytics
 import com.microsoft.appcenter.crashes.Crashes
+import org.jetbrains.anko.toast
 
 class BookListView : AppCompatActivity() {
 
@@ -32,8 +33,7 @@ class BookListView : AppCompatActivity() {
         )
 
         viewModel = ViewModelProviders.of(this).get(ListViewModel::class.java)
-        viewModel.query = query
-        viewModel.refresh()
+        viewModel.refresh(query)
 
         booksList.apply {
             layoutManager = LinearLayoutManager(context)
@@ -42,7 +42,7 @@ class BookListView : AppCompatActivity() {
 
         swipeRefreshLayout.setOnRefreshListener {
             swipeRefreshLayout.isRefreshing = false
-            viewModel.refresh()
+            viewModel.refresh(query)
             Analytics.trackEvent("Book list refreshed")
         }
 
@@ -68,5 +68,7 @@ class BookListView : AppCompatActivity() {
                 }
             }
         })
+
+        viewModel.errorMessage.observe(this, Observer { toast(it) })
     }
 }

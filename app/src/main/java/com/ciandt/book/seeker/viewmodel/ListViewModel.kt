@@ -25,13 +25,13 @@ class ListViewModel: ViewModel() {
     val books = MutableLiveData<List<Book>>()
     val bookLoadError = MutableLiveData<Boolean>()
     val loading = MutableLiveData<Boolean>()
-    var query = String()
+    val errorMessage =  MutableLiveData<String>()
 
-    fun refresh(){
-        fetchBooks()
+    fun refresh(query: String){
+        fetchBooks(query)
     }
 
-    private fun fetchBooks(){
+    private fun fetchBooks(query: String){
         loading.value = true
         disposable.add(
             booksService.getApiResponse(query)
@@ -46,14 +46,14 @@ class ListViewModel: ViewModel() {
                         } else{
                             bookLoadError.value = true
                             loading.value = false
+                            errorMessage.value = "Please try another query"
                         }
-
                     }
                     override fun onError(e: Throwable?) {
                         bookLoadError.value = true
                         loading.value = false
+                        errorMessage.value = "Request has failed, please try again latter"
                     }
-
                 })
         )
     }
