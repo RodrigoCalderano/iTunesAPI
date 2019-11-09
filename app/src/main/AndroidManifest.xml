@@ -11,14 +11,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.BookDetailsActivity"></activity>
-        <activity android:name=".view.BookListView">
+        <activity android:name=".view.BookSearchActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".view.BookDetailsActivity" />
+        <activity android:name=".view.BookListView"/>
+
     </application>
 
 </manifest>
