@@ -24,6 +24,7 @@ class BookDetailsActivity : AppCompatActivity() {
         val progressDrawable = getProgressDrawable(this)
         detailsTitle.text = name
         detailsAuthor.text = author
+        @Suppress("DEPRECATION")
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             detailsDesc.text = Html.fromHtml(description, Html.FROM_HTML_MODE_LEGACY).toString()
         } else detailsDesc.text =  Html.fromHtml(description).toString()

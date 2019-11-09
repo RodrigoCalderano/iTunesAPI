@@ -38,6 +38,11 @@ class ListViewModel: ViewModel() {
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(object: DisposableSingleObserver <ApiResponse>(){
+                    override fun onError(e: Throwable) {
+                        bookLoadError.value = true
+                        loading.value = false
+                        errorMessage.value = "Request has failed, please try again latter"
+                    }
                     override fun onSuccess(value: ApiResponse) {
                         if (value.resultCount > 0){
                             books.value = value.results
@@ -48,11 +53,6 @@ class ListViewModel: ViewModel() {
                             loading.value = false
                             errorMessage.value = "Please try another query"
                         }
-                    }
-                    override fun onError(e: Throwable?) {
-                        bookLoadError.value = true
-                        loading.value = false
-                        errorMessage.value = "Request has failed, please try again latter"
                     }
                 })
         )
