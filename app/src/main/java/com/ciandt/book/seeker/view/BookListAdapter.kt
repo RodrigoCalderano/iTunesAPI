@@ -1,5 +1,6 @@
 package com.ciandt.book.seeker.view
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,6 +31,7 @@ class BookListAdapter(var books: ArrayList<Book>): RecyclerView.Adapter<BookList
 
     class BookViewHolder(view: View): RecyclerView.ViewHolder(view) {
 
+        private val bookCardView = view.book_card_view
         private val imageView = view.imageView
         private val bookName = view.book_name
         private val author = view.author
@@ -39,6 +41,17 @@ class BookListAdapter(var books: ArrayList<Book>): RecyclerView.Adapter<BookList
             bookName.text = book.name
             author.text = book.author
             imageView.loadImage(book.image1100, progressDrawable)
+            bookCardView.setOnClickListener { onClick(it, book) }
+        }
+
+        private fun onClick(view: View, book: Book) {
+            val context = view.context
+            val intent = Intent(context, BookDetailsActivity::class.java)
+            intent.putExtra("name", book.name)
+            intent.putExtra("author", book.author)
+            intent.putExtra("description", book.description)
+            intent.putExtra("image1100", book.image1100)
+            context.startActivity(intent)
         }
     }
 }
