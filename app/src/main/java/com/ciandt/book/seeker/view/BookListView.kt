@@ -17,6 +17,8 @@ import com.microsoft.appcenter.crashes.Crashes
 
 class BookListView : AppCompatActivity() {
 
+    val query : String by lazy { intent.getStringExtra("query")}
+
     private lateinit var viewModel: ListViewModel
     private val booksAdapter = BookListAdapter(arrayListOf())
 
@@ -30,6 +32,7 @@ class BookListView : AppCompatActivity() {
         )
 
         viewModel = ViewModelProviders.of(this).get(ListViewModel::class.java)
+        viewModel.query = query
         viewModel.refresh()
 
         booksList.apply {

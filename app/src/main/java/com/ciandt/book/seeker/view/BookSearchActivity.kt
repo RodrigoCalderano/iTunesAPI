@@ -7,13 +7,13 @@ import android.text.TextWatcher
 import com.ciandt.book.seeker.R
 import org.jetbrains.anko.startActivity
 import kotlinx.android.synthetic.main.activity_book_search.*
+import org.jetbrains.anko.toast
 
 class BookSearchActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_book_search)
-
         setupListeners()
     }
 
@@ -23,7 +23,8 @@ class BookSearchActivity : AppCompatActivity() {
                 textInputLayout.error = "Your query must be bigger"
             } else {
                 textInputLayout.error = null
-                loginLoginBtnClicked()
+                val query = searchTxt.text
+                startActivity<BookListView>("query" to query.toString())
             }
         }
 
@@ -44,9 +45,4 @@ class BookSearchActivity : AppCompatActivity() {
         return text != null && text.length >= 2
     }
 
-    private fun loginLoginBtnClicked() {
-        print("asdasddsaasd")
-        print(searchTxt.text)
-        startActivity<BookListView>("myParam" to 'a')
-    }
 }
