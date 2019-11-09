@@ -8,20 +8,24 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ciandt.book.seeker.BuildConfig
 import com.ciandt.book.seeker.R
+import com.ciandt.book.seeker.adapter.BookListAdapter
 import com.ciandt.book.seeker.viewmodel.ListViewModel
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_book_list.*
 import com.microsoft.appcenter.AppCenter
 import com.microsoft.appcenter.analytics.Analytics
 import com.microsoft.appcenter.crashes.Crashes
+import org.jetbrains.anko.toast
 
-class MainActivity : AppCompatActivity() {
+class BookListView : AppCompatActivity() {
+
+    val query : String by lazy { intent.getStringExtra("query")}
 
     private lateinit var viewModel: ListViewModel
     private val booksAdapter = BookListAdapter(arrayListOf())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_book_list)
 
         AppCenter.start(
             application, BuildConfig.APPCENTER_SECRET,
@@ -29,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         )
 
         viewModel = ViewModelProviders.of(this).get(ListViewModel::class.java)
-        viewModel.refresh()
+        viewModel.refresh(query)
 
         booksList.apply {
             layoutManager = LinearLayoutManager(context)
@@ -38,7 +42,7 @@ class MainActivity : AppCompatActivity() {
 
         swipeRefreshLayout.setOnRefreshListener {
             swipeRefreshLayout.isRefreshing = false
-            viewModel.refresh()
+            viewModel.refresh(query)
             Analytics.trackEvent("Book list refreshed")
         }
 
@@ -64,5 +68,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
+
+        viewModel.errorMessage.observe(this, Observer { toast(it) })
     }
 }

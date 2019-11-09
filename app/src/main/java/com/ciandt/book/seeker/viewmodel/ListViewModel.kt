@@ -22,33 +22,38 @@ class ListViewModel: ViewModel() {
 
     private val disposable = CompositeDisposable()
 
-
     val books = MutableLiveData<List<Book>>()
     val bookLoadError = MutableLiveData<Boolean>()
     val loading = MutableLiveData<Boolean>()
+    val errorMessage =  MutableLiveData<String>()
 
-    fun refresh(){
-        fetchBooks()
+    fun refresh(query: String){
+        fetchBooks(query)
     }
 
-    private fun fetchBooks(){
+    private fun fetchBooks(query: String){
         loading.value = true
         disposable.add(
-            booksService.getApiResponse()
+            booksService.getApiResponse(query)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(object: DisposableSingleObserver <ApiResponse>(){
                     override fun onSuccess(value: ApiResponse) {
-                        books.value = value.results
-                        bookLoadError.value = false
-                        loading.value = false
+                        if (value.resultCount > 0){
+                            books.value = value.results
+                            bookLoadError.value = false
+                            loading.value = false
+                        } else{
+                            bookLoadError.value = true
+                            loading.value = false
+                            errorMessage.value = "Please try another query"
+                        }
                     }
-
                     override fun onError(e: Throwable?) {
                         bookLoadError.value = true
                         loading.value = false
+                        errorMessage.value = "Request has failed, please try again latter"
                     }
-
                 })
         )
     }

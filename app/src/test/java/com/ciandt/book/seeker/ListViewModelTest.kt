@@ -48,9 +48,9 @@ class ListViewModelTest {
         val apiResponse = ApiResponse(booksList,10)
         testSingle = Single.just(apiResponse)
 
-        `when`(booksService.getApiResponse()).thenReturn(testSingle)
+        `when`(booksService.getApiResponse("kotlin")).thenReturn(testSingle)
 
-        listViewModel.refresh()
+        listViewModel.refresh("kotlin")
 
         Assert.assertEquals(1, listViewModel.books.value?.size)
         Assert.assertEquals(false,listViewModel.bookLoadError.value)
@@ -61,9 +61,9 @@ class ListViewModelTest {
     fun getBooksFail() {
         testSingle = Single.error(Throwable())
 
-        `when`(booksService.getApiResponse()).thenReturn(testSingle)
+        `when`(booksService.getApiResponse("kotlin")).thenReturn(testSingle)
 
-        listViewModel.refresh()
+        listViewModel.refresh("kotlin")
 
         Assert.assertEquals(true,listViewModel.bookLoadError.value)
         Assert.assertEquals(false,listViewModel.loading.value)
