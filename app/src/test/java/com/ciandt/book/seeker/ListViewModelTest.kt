@@ -48,7 +48,7 @@ class ListViewModelTest {
         val apiResponse = ApiResponse(booksList,10)
         testSingle = Single.just(apiResponse)
 
-        `when`(booksService.getApiResponse()).thenReturn(testSingle)
+        `when`(booksService.getApiResponse("kotlin")).thenReturn(testSingle)
 
         listViewModel.refresh()
 
@@ -61,7 +61,7 @@ class ListViewModelTest {
     fun getBooksFail() {
         testSingle = Single.error(Throwable())
 
-        `when`(booksService.getApiResponse()).thenReturn(testSingle)
+        `when`(booksService.getApiResponse("kotlin")).thenReturn(testSingle)
 
         listViewModel.refresh()
 

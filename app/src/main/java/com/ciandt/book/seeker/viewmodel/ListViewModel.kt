@@ -22,7 +22,6 @@ class ListViewModel: ViewModel() {
 
     private val disposable = CompositeDisposable()
 
-
     val books = MutableLiveData<List<Book>>()
     val bookLoadError = MutableLiveData<Boolean>()
     val loading = MutableLiveData<Boolean>()
@@ -34,7 +33,7 @@ class ListViewModel: ViewModel() {
     private fun fetchBooks(){
         loading.value = true
         disposable.add(
-            booksService.getApiResponse()
+            booksService.getApiResponse("stock market")
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(object: DisposableSingleObserver <ApiResponse>(){

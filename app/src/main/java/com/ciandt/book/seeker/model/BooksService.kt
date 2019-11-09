@@ -12,7 +12,7 @@ class BooksService {
         DaggerApiComponent.create().inject(this)
     }
 
-    fun getApiResponse(): Single<ApiResponse> {
-        return api.getApiData()
+    fun getApiResponse(query: String): Single<ApiResponse> {
+        return api.getApiData(query)
     }
 }
