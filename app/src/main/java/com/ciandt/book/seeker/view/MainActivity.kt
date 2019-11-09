@@ -6,20 +6,27 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.ciandt.book.seeker.BuildConfig
 import com.ciandt.book.seeker.R
 import com.ciandt.book.seeker.viewmodel.ListViewModel
 import kotlinx.android.synthetic.main.activity_main.*
+import com.microsoft.appcenter.AppCenter
+import com.microsoft.appcenter.analytics.Analytics
+import com.microsoft.appcenter.crashes.Crashes
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var viewModel: ListViewModel
+    private lateinit var viewModel: ListViewModel
     private val booksAdapter = BookListAdapter(arrayListOf())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        AppCenter.start(
+            application, BuildConfig.APPCENTER_SECRET,
+            Analytics::class.java, Crashes::class.java
+        )
 
         viewModel = ViewModelProviders.of(this).get(ListViewModel::class.java)
         viewModel.refresh()
@@ -29,19 +36,16 @@ class MainActivity : AppCompatActivity() {
             adapter = booksAdapter
         }
 
-        SwipeRefreshLayout.OnRefreshListener{
-            viewModel.refresh()
-        }
-
         swipeRefreshLayout.setOnRefreshListener {
             swipeRefreshLayout.isRefreshing = false
             viewModel.refresh()
+            Analytics.trackEvent("Book list refreshed")
         }
 
         observeViewModel()
     }
 
-    fun observeViewModel() {
+    private fun observeViewModel() {
         viewModel.books.observe(this, Observer {books ->
             books?.let{ booksAdapter.updateBooks(it)}
             booksList.visibility = View.VISIBLE
