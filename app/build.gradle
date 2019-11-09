@@ -125,7 +125,7 @@ dependencies {
     // Anko
     implementation "org.jetbrains.anko:anko-commons:$anko_version"
 
-    // AppBar
+    // Material
     implementation 'com.google.android.material:material:1.0.0'
 
     // Google Room
