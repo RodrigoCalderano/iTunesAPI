@@ -12,7 +12,7 @@ import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class ListViewModel: ViewModel() {
+class BookListViewModel: ViewModel() {
 
     @Inject
     lateinit var booksService: BooksService

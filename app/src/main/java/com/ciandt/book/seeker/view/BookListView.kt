@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.ciandt.book.seeker.BuildConfig
 import com.ciandt.book.seeker.R
 import com.ciandt.book.seeker.adapter.BookListAdapter
-import com.ciandt.book.seeker.viewmodel.ListViewModel
+import com.ciandt.book.seeker.viewmodel.BookListViewModel
 import kotlinx.android.synthetic.main.activity_book_list.*
 import com.microsoft.appcenter.AppCenter
 import com.microsoft.appcenter.analytics.Analytics
@@ -20,7 +20,7 @@ class BookListView : AppCompatActivity() {
 
     val query : String by lazy { intent.getStringExtra("query")}
 
-    private lateinit var viewModel: ListViewModel
+    private lateinit var viewModel: BookListViewModel
     private val booksAdapter = BookListAdapter(arrayListOf())
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,7 +32,7 @@ class BookListView : AppCompatActivity() {
             Analytics::class.java, Crashes::class.java
         )
 
-        viewModel = ViewModelProviders.of(this).get(ListViewModel::class.java)
+        viewModel = ViewModelProviders.of(this).get(BookListViewModel::class.java)
         viewModel.refresh(query)
 
         booksList.apply {

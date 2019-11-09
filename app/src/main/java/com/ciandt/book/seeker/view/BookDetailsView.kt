@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.activity_book_details.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 
-class BookDetailsActivity : AppCompatActivity() {
+class BookDetailsView : AppCompatActivity() {
 
     private val name: String by lazy { intent.getStringExtra("name") }
 
