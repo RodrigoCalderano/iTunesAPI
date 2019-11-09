@@ -121,6 +121,9 @@ dependencies {
     // Anko
     implementation "org.jetbrains.anko:anko-commons:$anko_version"
 
+    // AppBar
+    implementation 'com.google.android.material:material:1.0.0'
+
     detektPlugins "io.gitlab.arturbosch.detekt:detekt-formatting:1.0.1"
 }
 
