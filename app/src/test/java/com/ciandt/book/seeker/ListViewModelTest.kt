@@ -72,7 +72,7 @@ class ListViewModelTest {
     @Before
     fun setUpRxSchedulers() {
         val immediate = object : Scheduler() {
-            override fun scheduleDirect(run: Runnable?, delay: Long, unit: TimeUnit?): Disposable {
+            override fun scheduleDirect(run: Runnable, delay: Long, unit: TimeUnit): Disposable {
                 return super.scheduleDirect(run, 0, unit)
             }
 

@@ -9,7 +9,7 @@ object DatabaseManager {
     init {
         val appContext = BooksApplication.getInstance().applicationContext
         dbInstance = Room.databaseBuilder(appContext,
-            BookDatabase::class.java, "carros.sqlite").build()
+            BookDatabase::class.java, "books.sqlite").build()
     }
 
     fun getBookDAO(): BookDAO {
