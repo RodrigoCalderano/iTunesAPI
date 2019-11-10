@@ -41,7 +41,7 @@ class BookListView : AppCompatActivity() {
 
         swipeRefreshLayout.setOnRefreshListener {
             swipeRefreshLayout.isRefreshing = false
-            viewModel.refresh(query)
+            viewModel.refresh(query, true)
             Analytics.trackEvent("Book list refreshed")
         }
 

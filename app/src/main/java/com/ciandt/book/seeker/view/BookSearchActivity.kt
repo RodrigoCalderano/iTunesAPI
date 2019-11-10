@@ -39,7 +39,6 @@ class BookSearchActivity : AppCompatActivity() {
                 }
             }
         }
-
         searchTxt.addTextChangedListener(tw)
     }
 
