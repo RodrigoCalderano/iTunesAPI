@@ -134,11 +134,11 @@ dependencies {
     kapt "android.arch.persistence.room:compiler:$room_version"
 
 
-    detektPlugins "io.gitlab.arturbosch.detekt:detekt-formatting:1.0.1"
+    detektPlugins "io.gitlab.arturbosch.detekt:detekt-formatting:1.1.1"
 }
 
 detekt {
-    toolVersion '1.0.1'
+    toolVersion '1.1.0'
     input = files("src/main/java")
     config = files("$rootDir/default-detekt-config.yml")
     reports {

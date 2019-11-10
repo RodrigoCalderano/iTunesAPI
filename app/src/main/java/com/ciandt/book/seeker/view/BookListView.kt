@@ -18,8 +18,7 @@ import org.jetbrains.anko.toast
 
 class BookListView : AppCompatActivity() {
 
-    val query : String by lazy { intent.getStringExtra("query")}
-
+    private val query: String by lazy { intent.getStringExtra("query") }
     private lateinit var viewModel: BookListViewModel
     private val booksAdapter = BookListAdapter(arrayListOf())
 
@@ -50,19 +49,19 @@ class BookListView : AppCompatActivity() {
     }
 
     private fun observeViewModel() {
-        viewModel.books.observe(this, Observer {books ->
-            books?.let{ booksAdapter.updateBooks(it)}
+        viewModel.books.observe(this, Observer { books ->
+            books?.let { booksAdapter.updateBooks(it) }
             booksList.visibility = View.VISIBLE
         })
 
         viewModel.bookLoadError.observe(this, Observer { isError ->
-            isError?.let { list_error.visibility = if(it) View.VISIBLE else View.GONE}
+            isError?.let { list_error.visibility = if (it) View.VISIBLE else View.GONE }
         })
 
         viewModel.loading.observe(this, Observer { isLoading ->
             isLoading?.let {
-                loading_view.visibility = if(it) View.VISIBLE else View.GONE
-                if(it) {
+                loading_view.visibility = if (it) View.VISIBLE else View.GONE
+                if (it) {
                     list_error.visibility = View.GONE
                     booksList.visibility = View.GONE
                 }

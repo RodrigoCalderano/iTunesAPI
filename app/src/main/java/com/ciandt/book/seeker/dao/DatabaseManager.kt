@@ -13,6 +13,6 @@ object DatabaseManager {
     }
 
     fun getBookDAO(): BookDAO {
-        return dbInstance.BookDAO()
+        return dbInstance.bookDAO()
     }
 }

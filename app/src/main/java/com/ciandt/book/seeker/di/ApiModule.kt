@@ -11,8 +11,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 @Module
 class ApiModule {
 
-    private val BASE_URL = "https://itunes.apple.com/"
-
     @Provides
     fun provideBooksApi(): BooksApi {
         return Retrofit.Builder()
@@ -26,5 +24,9 @@ class ApiModule {
     @Provides
     fun provideBooksService(): BooksService {
         return BooksService()
+    }
+
+    companion object {
+        private const val BASE_URL = "https://itunes.apple.com/"
     }
 }

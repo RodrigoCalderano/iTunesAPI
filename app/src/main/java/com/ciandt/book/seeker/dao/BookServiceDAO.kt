@@ -2,7 +2,6 @@ package com.ciandt.book.seeker.dao
 
 import com.ciandt.book.seeker.model.Book
 
-
 object BookServiceDAO {
     fun getBooks(): List<Book> {
         val dao = DatabaseManager.getBookDAO()
@@ -16,7 +15,7 @@ object BookServiceDAO {
         return book
     }
 
-    fun isSaved(book: Book) : Boolean {
+    fun isSaved(book: Book): Boolean {
         val dao = DatabaseManager.getBookDAO()
         val exists = dao.getByName(book.name) != null
         return exists
@@ -25,11 +24,10 @@ object BookServiceDAO {
     fun save(book: Book): String {
         val saved = isSaved(book)
         val dao = DatabaseManager.getBookDAO()
-        if(saved) {
-            //dao.delete(book)
+        if (saved) {
+            // dao.delete(book)
             return "Already saved"
-        }
-        else {
+        } else {
             dao.insert(book)
             return "Saved"
         }

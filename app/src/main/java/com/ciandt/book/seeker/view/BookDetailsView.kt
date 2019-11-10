@@ -19,7 +19,6 @@ class BookDetailsView : AppCompatActivity() {
 
     private lateinit var viewModel: BookDetailsViewModel
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_book_details)

@@ -15,7 +15,8 @@ import kotlinx.android.synthetic.main.item_book.view.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 
-class BookListAdapter(var books: ArrayList<Book>): RecyclerView.Adapter<BookListAdapter.BookViewHolder>() {
+class BookListAdapter(var books: ArrayList<Book>) :
+    RecyclerView.Adapter<BookListAdapter.BookViewHolder> () {
 
     fun updateBooks(newBooks: List<Book>) {
         books.clear()
@@ -34,7 +35,7 @@ class BookListAdapter(var books: ArrayList<Book>): RecyclerView.Adapter<BookList
         holder.bind(books[position])
     }
 
-    class BookViewHolder(view: View): RecyclerView.ViewHolder(view) {
+    class BookViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         private val bookCardView = view.book_card_view
         private val imageView = view.imageView
@@ -42,7 +43,7 @@ class BookListAdapter(var books: ArrayList<Book>): RecyclerView.Adapter<BookList
         private val author = view.author
         private val progressDrawable = getProgressDrawable(view.context)
 
-        fun bind(book: Book){
+        fun bind(book: Book) {
             bookName.text = book.name
             author.text = book.author
             imageView.loadImage(book.image1100, progressDrawable)

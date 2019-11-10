@@ -4,7 +4,7 @@ import android.util.Log
 import androidx.multidex.MultiDexApplication
 
 class BooksApplication : MultiDexApplication() {
-    private val TAG = "BooksApplication"
+    private val tag = "BooksApplication"
     override fun onCreate() {
         super.onCreate()
         appInstance = this
@@ -13,14 +13,14 @@ class BooksApplication : MultiDexApplication() {
         // Singleton da classe Application
         private var appInstance: BooksApplication? = null
         fun getInstance(): BooksApplication {
-            if(appInstance == null) {
+            if (appInstance == null) {
                 throw IllegalStateException("Must configure application in AndroidManifest")
             }
             return appInstance!!
         }
     }
-    override fun onTerminate(){
+    override fun onTerminate() {
         super.onTerminate()
-        Log.d(TAG, "BooksApplication.onTerminate()")
+        Log.d(tag, "BooksApplication.onTerminate()")
     }
 }

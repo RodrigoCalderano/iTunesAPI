@@ -1,5 +1,4 @@
 package com.ciandt.book.seeker.view
-
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
@@ -7,7 +6,6 @@ import android.text.TextWatcher
 import com.ciandt.book.seeker.R
 import org.jetbrains.anko.startActivity
 import kotlinx.android.synthetic.main.activity_book_search.*
-import org.jetbrains.anko.toast
 
 class BookSearchActivity : AppCompatActivity() {
 
@@ -18,7 +16,7 @@ class BookSearchActivity : AppCompatActivity() {
     }
 
     private fun setupListeners() {
-        button.setOnClickListener{
+        button.setOnClickListener {
             if (!isQueryValid(searchTxt.text!!)) {
                 textInputLayout.error = "Your query must be bigger"
             } else {
@@ -29,8 +27,8 @@ class BookSearchActivity : AppCompatActivity() {
         }
 
         val tw = object : TextWatcher {
-            override fun afterTextChanged(s: Editable) {}
-            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+            override fun afterTextChanged(s: Editable) { true }
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) { true }
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 if (isQueryValid(searchTxt.text!!)) {
                     textInputLayout.error = null
@@ -44,5 +42,4 @@ class BookSearchActivity : AppCompatActivity() {
     private fun isQueryValid(text: Editable?): Boolean {
         return text != null && text.length >= 2
     }
-
 }
