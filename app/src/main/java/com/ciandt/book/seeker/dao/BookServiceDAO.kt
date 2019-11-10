@@ -17,19 +17,31 @@ object BookServiceDAO {
 
     fun isSaved(book: Book): Boolean {
         val dao = DatabaseManager.getBookDAO()
-        val exists = dao.getByName(book.name) != null
-        return exists
+        return dao.getByName(book.name) != null
+    }
+
+    fun saveAll(books: List<Book>): Boolean {
+        try {
+            books.forEach {
+                if (!isSaved(it)) {
+                    save(it)
+                }
+            }
+        } catch (e: Throwable) {
+            return false
+        }
+        return true
     }
 
     fun save(book: Book): String {
         val saved = isSaved(book)
         val dao = DatabaseManager.getBookDAO()
-        if (saved) {
+        return if (saved) {
             // dao.delete(book)
-            return "Already saved"
+            "Already saved"
         } else {
             dao.insert(book)
-            return "Saved"
+            "Saved"
         }
     }
 }

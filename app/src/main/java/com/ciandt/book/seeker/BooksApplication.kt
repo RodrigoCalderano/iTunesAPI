@@ -10,9 +10,7 @@ class BooksApplication : MultiDexApplication() {
     companion object {
         private var appInstance: BooksApplication? = null
         fun getInstance(): BooksApplication {
-            if (appInstance == null) {
-                throw IllegalStateException("Must configure application in AndroidManifest")
-            }
+            checkNotNull(appInstance) { "Must configure application in AndroidManifest" }
             return appInstance!!
         }
     }

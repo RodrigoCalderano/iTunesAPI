@@ -55,10 +55,11 @@ class BookListAdapter(var books: ArrayList<Book>) :
             doAsync {
                 val saving: String = BookServiceDAO.save(book)
                 uiThread {
-                    val context = view.context
-                    val intent = Intent(context, BookDetailsView::class.java)
-                    intent.putExtra("name", book.name)
-                    context.startActivity(intent)
+//                    val context = view.context
+//                    val intent = Intent(context, BookDetailsView::class.java)
+//                    intent.putExtra("name", book.name)
+//                    context.startActivity(intent)
+                    bookName.text = saving
                 }
             }
         }
