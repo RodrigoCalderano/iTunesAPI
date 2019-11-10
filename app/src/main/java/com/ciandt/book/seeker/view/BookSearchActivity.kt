@@ -27,8 +27,12 @@ class BookSearchActivity : AppCompatActivity() {
         }
 
         val tw = object : TextWatcher {
-            override fun afterTextChanged(s: Editable) { true }
-            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) { true }
+            override fun afterTextChanged(s: Editable) {
+                // Detekt EmptyFunctionBlock suppress
+                }
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
+                // Detekt EmptyFunctionBlock suppress
+                }
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 if (isQueryValid(searchTxt.text!!)) {
                     textInputLayout.error = null
