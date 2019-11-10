@@ -2,7 +2,6 @@ package com.ciandt.book.seeker.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import androidx.room.TypeConverter
 import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "book")
@@ -33,5 +32,3 @@ data class ApiResponse(
     @SerializedName("resultCount")
     val resultCount: Int
 )
-
-

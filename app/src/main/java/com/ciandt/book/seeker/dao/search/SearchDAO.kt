@@ -17,4 +17,3 @@ interface SearchDAO {
     @Delete
     fun delete(search: Search)
 }
-

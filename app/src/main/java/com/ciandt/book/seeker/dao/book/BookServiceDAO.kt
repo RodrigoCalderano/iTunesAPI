@@ -2,6 +2,7 @@ package com.ciandt.book.seeker.dao.book
 
 import com.ciandt.book.seeker.dao.DatabaseManager
 import com.ciandt.book.seeker.model.Book
+import java.io.IOException
 
 object BookServiceDAO {
     fun getBooks(): List<Book> {
@@ -26,7 +27,7 @@ object BookServiceDAO {
                     save(it)
                 }
             }
-        } catch (e: Throwable) {
+        } catch (e: IOException) {
             return false
         }
         return true

@@ -12,7 +12,6 @@ import com.ciandt.book.seeker.util.loadImage
 import com.ciandt.book.seeker.view.BookDetailsView
 import kotlinx.android.synthetic.main.item_book.view.*
 
-
 class BookListAdapter(var books: ArrayList<Book>) :
     RecyclerView.Adapter<BookListAdapter.BookViewHolder> () {
 

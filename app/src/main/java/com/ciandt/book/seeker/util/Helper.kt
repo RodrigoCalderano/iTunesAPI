@@ -1,17 +1,11 @@
 package com.ciandt.book.seeker.util
+
 import android.content.Context
 import android.widget.ImageView
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.ciandt.book.seeker.R
-
-class Constants {
-    companion object {
-        const val centerRadius = 50f
-        const val strokeWidth = 5f
-    }
-}
 
 fun getProgressDrawable(context: Context): CircularProgressDrawable {
     return CircularProgressDrawable(context).apply {
@@ -29,4 +23,11 @@ fun ImageView.loadImage(uri: String?, progressDrawable: CircularProgressDrawable
         .setDefaultRequestOptions(options)
         .load(uri)
         .into(this)
+}
+
+class Constants {
+    companion object {
+        const val centerRadius = 50f
+        const val strokeWidth = 5f
+    }
 }

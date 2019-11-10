@@ -35,11 +35,8 @@ class BookListViewModel : ViewModel() {
 
     fun refresh(query: String, swipe: Boolean = false) {
         loading.value = true
-        if (swipe) {
-            downloadData(query)
-        } else{
-            fetchBooks(query)
-        }
+        if (swipe) { downloadData(query)
+        } else { fetchBooks(query) }
     }
 
     private fun fetchBooks(query: String) {
@@ -47,13 +44,13 @@ class BookListViewModel : ViewModel() {
         doAsync {
             val isSaved = SearchServiceDAO.isSaved(query)
             uiThread {
-                if (isSaved){ getFromDb(query) }
-                else { downloadData(query) }
+                if (isSaved) { getFromDb(query)
+                } else { downloadData(query) }
             }
         }
     }
 
-    fun downloadData(query: String){
+    fun downloadData(query: String) {
         Toast.makeText(BooksApplication.getInstance().applicationContext,
             "Downloading from API", Toast.LENGTH_SHORT).show()
         disposable.add(
