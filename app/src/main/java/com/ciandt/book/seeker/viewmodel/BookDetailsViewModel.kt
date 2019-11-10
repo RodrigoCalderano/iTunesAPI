@@ -2,7 +2,7 @@ package com.ciandt.book.seeker.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.ciandt.book.seeker.dao.BookServiceDAO
+import com.ciandt.book.seeker.dao.book.BookServiceDAO
 import com.ciandt.book.seeker.model.Book
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread

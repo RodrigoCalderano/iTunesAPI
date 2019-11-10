@@ -1,5 +1,6 @@
-package com.ciandt.book.seeker.dao
+package com.ciandt.book.seeker.dao.search
 
+import com.ciandt.book.seeker.dao.DatabaseManager
 import com.ciandt.book.seeker.model.Search
 
 object SearchServiceDAO{

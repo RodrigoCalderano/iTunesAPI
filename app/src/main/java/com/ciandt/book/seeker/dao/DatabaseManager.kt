@@ -2,6 +2,10 @@ package com.ciandt.book.seeker.dao
 
 import androidx.room.Room
 import com.ciandt.book.seeker.BooksApplication
+import com.ciandt.book.seeker.dao.book.BookDAO
+import com.ciandt.book.seeker.dao.book.BookDatabase
+import com.ciandt.book.seeker.dao.search.SearchDAO
+import com.ciandt.book.seeker.dao.search.SearchDatabase
 
 object DatabaseManager {
     private var dbInstance: BookDatabase

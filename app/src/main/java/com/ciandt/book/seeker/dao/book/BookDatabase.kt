@@ -1,4 +1,4 @@
-package com.ciandt.book.seeker.dao
+package com.ciandt.book.seeker.dao.book
 
 import androidx.room.Database
 import androidx.room.RoomDatabase

@@ -1,4 +1,4 @@
-package com.ciandt.book.seeker.dao
+package com.ciandt.book.seeker.dao.search
 
 import androidx.room.Dao
 import androidx.room.Delete

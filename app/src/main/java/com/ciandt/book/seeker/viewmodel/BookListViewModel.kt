@@ -3,8 +3,8 @@ import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.ciandt.book.seeker.BooksApplication
-import com.ciandt.book.seeker.dao.BookServiceDAO
-import com.ciandt.book.seeker.dao.SearchServiceDAO
+import com.ciandt.book.seeker.dao.book.BookServiceDAO
+import com.ciandt.book.seeker.dao.search.SearchServiceDAO
 import com.ciandt.book.seeker.di.DaggerApiComponent
 import com.ciandt.book.seeker.model.ApiResponse
 import com.ciandt.book.seeker.model.Book

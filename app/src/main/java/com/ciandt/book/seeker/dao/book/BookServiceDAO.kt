@@ -1,5 +1,6 @@
-package com.ciandt.book.seeker.dao
+package com.ciandt.book.seeker.dao.book
 
+import com.ciandt.book.seeker.dao.DatabaseManager
 import com.ciandt.book.seeker.model.Book
 
 object BookServiceDAO {
