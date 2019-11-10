@@ -5,14 +5,12 @@ import com.ciandt.book.seeker.model.Book
 object BookServiceDAO {
     fun getBooks(): List<Book> {
         val dao = DatabaseManager.getBookDAO()
-        val books = dao.findAll()
-        return books
+        return dao.findAll()
     }
 
     fun getBook(name: String): Book? {
         val dao = DatabaseManager.getBookDAO()
-        val book = dao.getByName(name)
-        return book
+        return dao.getByName(name)
     }
 
     fun isSaved(book: Book): Boolean {

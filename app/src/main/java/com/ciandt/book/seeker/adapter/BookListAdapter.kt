@@ -6,14 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ciandt.book.seeker.R
-import com.ciandt.book.seeker.dao.BookServiceDAO
 import com.ciandt.book.seeker.model.Book
 import com.ciandt.book.seeker.util.getProgressDrawable
 import com.ciandt.book.seeker.util.loadImage
 import com.ciandt.book.seeker.view.BookDetailsView
 import kotlinx.android.synthetic.main.item_book.view.*
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.uiThread
+
 
 class BookListAdapter(var books: ArrayList<Book>) :
     RecyclerView.Adapter<BookListAdapter.BookViewHolder> () {
@@ -51,17 +49,10 @@ class BookListAdapter(var books: ArrayList<Book>) :
         }
 
         private fun onClick(view: View, book: Book) {
-
-            doAsync {
-                val saving: String = BookServiceDAO.save(book)
-                uiThread {
-//                    val context = view.context
-//                    val intent = Intent(context, BookDetailsView::class.java)
-//                    intent.putExtra("name", book.name)
-//                    context.startActivity(intent)
-                    bookName.text = saving
-                }
-            }
+            val context = view.context
+            val intent = Intent(context, BookDetailsView::class.java)
+            intent.putExtra("name", book.name)
+            context.startActivity(intent)
         }
     }
 }

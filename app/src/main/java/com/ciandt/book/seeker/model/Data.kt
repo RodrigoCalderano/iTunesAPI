@@ -2,6 +2,7 @@ package com.ciandt.book.seeker.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import androidx.room.TypeConverter
 import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "book")
@@ -19,9 +20,18 @@ data class Book(
     val image1100: String
 )
 
+@Entity(tableName = "search")
+data class Search(
+    @PrimaryKey
+    val queryName: String,
+    val booksNames: List<String>
+)
+
 data class ApiResponse(
     @SerializedName("results")
     val results: List<Book>,
     @SerializedName("resultCount")
     val resultCount: Int
 )
+
+
