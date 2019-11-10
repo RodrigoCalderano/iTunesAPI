@@ -1,8 +1,12 @@
 package com.ciandt.book.seeker.model
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
+@Entity(tableName = "book")
 data class Book(
+    @PrimaryKey
     @SerializedName("trackName")
     val name: String,
     @SerializedName("artistName")

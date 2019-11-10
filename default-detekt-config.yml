@@ -1,10 +1,15 @@
 build:
-  maxIssues: 10
+  maxIssues: 15
   weights:
   # complexity: 2
   # LongParameterList: 1
   # style: 1
   # comments: 1
+
+config:
+  validation: true
+  # when writing own rules with new properties, exclude the property path e.g.: "my_rule_set,.*>.*>[my_property]"
+  excludes: ""
 
 processors:
   active: true
@@ -43,6 +48,8 @@ comments:
     searchInInnerObject: true
     searchInInnerInterface: true
   UndocumentedPublicFunction:
+    active: false
+  UndocumentedPublicProperty:
     active: false
 
 complexity:
@@ -146,6 +153,7 @@ exceptions:
     active: false
   ReturnFromFinally:
     active: false
+    ignoreLabeled: false
   SwallowedException:
     active: false
     ignoredExceptionTypes: 'InterruptedException,NumberFormatException,ParseException,MalformedURLException'
@@ -387,6 +395,10 @@ potential-bugs:
     active: true
   ExplicitGarbageCollectionCall:
     active: true
+  HasPlatformType:
+    active: false
+  ImplicitDefaultLocale:
+    active: false
   InvalidRange:
     active: false
   IteratorHasNextCallsNextMethod:
@@ -440,6 +452,7 @@ style:
   ForbiddenImport:
     active: false
     imports: ''
+    forbiddenPatterns: ""
   ForbiddenVoid:
     active: false
     ignoreOverridden: false
@@ -448,6 +461,7 @@ style:
     active: false
     ignoreOverridableFunction: true
     excludedFunctions: 'describeContents'
+    excludeAnnotatedFunction: "dagger.Provides"
   LibraryCodeMustSpecifyReturnType:
     active: false
   LoopWithTooManyJumpStatements:

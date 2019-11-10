@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.BookDetailsActivity">
+    tools:context=".view.BookDetailsView">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -57,6 +57,7 @@
                 android:layout_marginEnd="20dp"
                 android:text="@string/author"
                 android:textStyle="italic"
+                android:maxLines="2"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"

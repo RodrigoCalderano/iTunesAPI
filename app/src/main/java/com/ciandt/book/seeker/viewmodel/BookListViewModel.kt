@@ -1,5 +1,4 @@
 package com.ciandt.book.seeker.viewmodel
-
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.ciandt.book.seeker.di.DaggerApiComponent
@@ -12,7 +11,7 @@ import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class ListViewModel: ViewModel() {
+class BookListViewModel : ViewModel() {
 
     @Inject
     lateinit var booksService: BooksService
@@ -25,34 +24,34 @@ class ListViewModel: ViewModel() {
     val books = MutableLiveData<List<Book>>()
     val bookLoadError = MutableLiveData<Boolean>()
     val loading = MutableLiveData<Boolean>()
-    val errorMessage =  MutableLiveData<String>()
+    val errorMessage = MutableLiveData<String>()
 
-    fun refresh(query: String){
+    fun refresh(query: String) {
         fetchBooks(query)
     }
 
-    private fun fetchBooks(query: String){
+    private fun fetchBooks(query: String) {
         loading.value = true
         disposable.add(
             booksService.getApiResponse(query)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(object: DisposableSingleObserver <ApiResponse>(){
+                .subscribeWith(object : DisposableSingleObserver <ApiResponse>() {
+                    override fun onError(e: Throwable) {
+                        bookLoadError.value = true
+                        loading.value = false
+                        errorMessage.value = "Request has failed, please try again latter"
+                    }
                     override fun onSuccess(value: ApiResponse) {
-                        if (value.resultCount > 0){
+                        if (value.resultCount > 0) {
                             books.value = value.results
                             bookLoadError.value = false
                             loading.value = false
-                        } else{
+                        } else {
                             bookLoadError.value = true
                             loading.value = false
                             errorMessage.value = "Please try another query"
                         }
-                    }
-                    override fun onError(e: Throwable?) {
-                        bookLoadError.value = true
-                        loading.value = false
-                        errorMessage.value = "Request has failed, please try again latter"
                     }
                 })
         )

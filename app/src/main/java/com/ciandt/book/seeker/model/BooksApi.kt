@@ -7,6 +7,5 @@ import retrofit2.http.Query
 interface BooksApi {
 
     @GET("search")
-    fun getApiData(@Query("term") query: String,
-                   @Query("entity") entity: String = "ibook"): Single<ApiResponse>
+    fun getApiData(@Query("term") query: String, @Query("entity") entity: String = "ibook"): Single<ApiResponse>
 }

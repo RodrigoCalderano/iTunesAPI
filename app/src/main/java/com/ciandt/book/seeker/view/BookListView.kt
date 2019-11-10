@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.ciandt.book.seeker.BuildConfig
 import com.ciandt.book.seeker.R
 import com.ciandt.book.seeker.adapter.BookListAdapter
-import com.ciandt.book.seeker.viewmodel.ListViewModel
+import com.ciandt.book.seeker.viewmodel.BookListViewModel
 import kotlinx.android.synthetic.main.activity_book_list.*
 import com.microsoft.appcenter.AppCenter
 import com.microsoft.appcenter.analytics.Analytics
@@ -18,9 +18,8 @@ import org.jetbrains.anko.toast
 
 class BookListView : AppCompatActivity() {
 
-    val query : String by lazy { intent.getStringExtra("query")}
-
-    private lateinit var viewModel: ListViewModel
+    private val query: String by lazy { intent.getStringExtra("query") }
+    private lateinit var viewModel: BookListViewModel
     private val booksAdapter = BookListAdapter(arrayListOf())
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,7 +31,7 @@ class BookListView : AppCompatActivity() {
             Analytics::class.java, Crashes::class.java
         )
 
-        viewModel = ViewModelProviders.of(this).get(ListViewModel::class.java)
+        viewModel = ViewModelProviders.of(this).get(BookListViewModel::class.java)
         viewModel.refresh(query)
 
         booksList.apply {
@@ -50,19 +49,19 @@ class BookListView : AppCompatActivity() {
     }
 
     private fun observeViewModel() {
-        viewModel.books.observe(this, Observer {books ->
-            books?.let{ booksAdapter.updateBooks(it)}
+        viewModel.books.observe(this, Observer { books ->
+            books?.let { booksAdapter.updateBooks(it) }
             booksList.visibility = View.VISIBLE
         })
 
         viewModel.bookLoadError.observe(this, Observer { isError ->
-            isError?.let { list_error.visibility = if(it) View.VISIBLE else View.GONE}
+            isError?.let { list_error.visibility = if (it) View.VISIBLE else View.GONE }
         })
 
         viewModel.loading.observe(this, Observer { isLoading ->
             isLoading?.let {
-                loading_view.visibility = if(it) View.VISIBLE else View.GONE
-                if(it) {
+                loading_view.visibility = if (it) View.VISIBLE else View.GONE
+                if (it) {
                     list_error.visibility = View.GONE
                     booksList.visibility = View.GONE
                 }

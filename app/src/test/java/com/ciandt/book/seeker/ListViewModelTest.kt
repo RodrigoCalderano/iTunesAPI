@@ -4,7 +4,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.ciandt.book.seeker.model.ApiResponse
 import com.ciandt.book.seeker.model.Book
 import com.ciandt.book.seeker.model.BooksService
-import com.ciandt.book.seeker.viewmodel.ListViewModel
+import com.ciandt.book.seeker.viewmodel.BookListViewModel
 import io.reactivex.Scheduler
 import io.reactivex.Single
 import io.reactivex.android.plugins.RxAndroidPlugins
@@ -17,7 +17,6 @@ import org.junit.Rule
 import org.junit.Test
 import org.mockito.InjectMocks
 import org.mockito.Mock
-import org.mockito.Mockito
 import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 import java.util.concurrent.Executor
@@ -32,7 +31,7 @@ class ListViewModelTest {
     lateinit var booksService: BooksService
 
     @InjectMocks
-    var listViewModel = ListViewModel()
+    var listViewModel = BookListViewModel()
 
     private var testSingle: Single<ApiResponse>? = null
 
@@ -72,7 +71,7 @@ class ListViewModelTest {
     @Before
     fun setUpRxSchedulers() {
         val immediate = object : Scheduler() {
-            override fun scheduleDirect(run: Runnable?, delay: Long, unit: TimeUnit?): Disposable {
+            override fun scheduleDirect(run: Runnable, delay: Long, unit: TimeUnit): Disposable {
                 return super.scheduleDirect(run, 0, unit)
             }
 
