@@ -49,7 +49,7 @@ class ListViewModelTest {
 
         `when`(booksService.getApiResponse("kotlin")).thenReturn(testSingle)
 
-        listViewModel.refresh("kotlin")
+        listViewModel.downloadData("kotlin")
 
         Assert.assertEquals(1, listViewModel.books.value?.size)
         Assert.assertEquals(false,listViewModel.bookLoadError.value)
@@ -62,7 +62,7 @@ class ListViewModelTest {
 
         `when`(booksService.getApiResponse("kotlin")).thenReturn(testSingle)
 
-        listViewModel.refresh("kotlin")
+        listViewModel.downloadData("kotlin")
 
         Assert.assertEquals(true,listViewModel.bookLoadError.value)
         Assert.assertEquals(false,listViewModel.loading.value)

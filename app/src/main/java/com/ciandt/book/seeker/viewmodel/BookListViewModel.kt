@@ -2,10 +2,12 @@ package com.ciandt.book.seeker.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.ciandt.book.seeker.dao.BookServiceDAO
+import com.ciandt.book.seeker.dao.SearchServiceDAO
 import com.ciandt.book.seeker.di.DaggerApiComponent
 import com.ciandt.book.seeker.model.ApiResponse
 import com.ciandt.book.seeker.model.Book
 import com.ciandt.book.seeker.model.BooksService
+import com.ciandt.book.seeker.model.Search
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableSingleObserver
@@ -35,6 +37,17 @@ class BookListViewModel : ViewModel() {
 
     private fun fetchBooks(query: String) {
         loading.value = true
+
+        doAsync {
+            val isSaved = SearchServiceDAO.isSaved(query)
+            uiThread {
+                if (isSaved){ getFromDb(query) }
+                else { downloadData(query) }
+            }
+        }
+    }
+
+    fun downloadData(query: String){
         disposable.add(
             booksService.getApiResponse(query)
                 .subscribeOn(Schedulers.newThread())
@@ -50,7 +63,7 @@ class BookListViewModel : ViewModel() {
                             books.value = apiResponse.results
                             bookLoadError.value = false
                             loading.value = false
-                            saveDb(apiResponse.results)
+                            saveDb(apiResponse.results, query)
                         } else {
                             bookLoadError.value = true
                             loading.value = false
@@ -61,9 +74,32 @@ class BookListViewModel : ViewModel() {
         )
     }
 
-    private fun saveDb(books: List<Book>) {
+    private fun getFromDb(query: String) {
+        doAsync {
+            val search = SearchServiceDAO.getSearch(query)
+            var booksFromDb = listOf<Book>()
+
+            search!!.booksNames.forEach {
+                if (BookServiceDAO.getBook(it) != null) {
+                    booksFromDb = booksFromDb + BookServiceDAO.getBook(it)!!
+                }
+            }
+            uiThread {
+                books.value = booksFromDb
+                bookLoadError.value = false
+                loading.value = false
+            }
+        }
+    }
+
+    private fun saveDb(books: List<Book>, query: String) {
         doAsync {
             BookServiceDAO.saveAll(books)
+
+            var bookNameList = listOf<String>()
+            books.forEach { bookNameList = bookNameList + it.name }
+            val search = Search(query, bookNameList)
+            SearchServiceDAO.save(search)
         }
     }
 
