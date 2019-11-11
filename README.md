@@ -7,6 +7,10 @@
 
 An MVVM Android project written in [Kotlin](https://kotlinlang.org/) that consumes [iTunesAPI](https://affiliate.itunes.apple.com/resources/documentation/itunes-store-web-service-search-api/).
 
+<p align="center">
+    <img src="https://i0.wp.com/techtales.co/wp-content/uploads/2017/08/MVVM.png" width="600">
+</p>
+
 ## Libraries
 * [Retrofit 2](http://square.github.io/retrofit/)
 * [RxJava 2](https://github.com/ReactiveX/RxJava) and [RxAndroid](https://github.com/ReactiveX/RxAndroid)
