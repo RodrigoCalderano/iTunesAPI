@@ -19,6 +19,9 @@ An MVVM Android project written in [Kotlin](https://kotlinlang.org/) that consum
 * [Anko](https://github.com/Kotlin/anko)
 * [AppCenter](https://github.com/microsoft/appcenter-sdk-android)
 
+All layout files were made using [ConstraintLayout](https://developer.android.com/training/constraint-layout) and [Material Design Components](https://material.io/components/
+) (MaterialButton, TextInputLayout and CardView)
+
 ## Screenshots
 <p align="center">
   <img src="https://i.ibb.co/9rkns65/Whats-App-Image-2019-11-11-at-01-11-53.jpg" width="300">
