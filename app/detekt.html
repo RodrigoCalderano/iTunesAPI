@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>detekt report</title>
+    <style>
+h2 {
+  background-color: #666666;
+  padding: 0.2em;
+  color: #ffffff;
+}
+h3 {
+  background-color:#f8dfdf;
+  padding:0.5em;
+}
+.rule {
+  background-color: #dddddd;
+  padding: 0.3em;
+  font-weight: bold;
+}
+.description {
+  color:#000000;
+  padding:0.3em;
+}
+.location {
+  color: #690505;
+  font-family: monospace;
+}
+.message {
+  font-size: 0.8em;
+  color: #444444;
+}
+.rule-container {
+  border: 0.1em dashed #dddddd;
+  padding: 0.1em;
+  line-height: 1.5em;
+}
+</style>
+</head>
+<body>
+
+<h1>detekt report</h1>
+
+<h2>Metrics</h2>
+
+<ul>
+<li>
+number of kt files: 21
+</li>
+<li>
+number of packages: 10
+</li>
+<li>
+number of classes: 21
+</li>
+<li>
+number of functions: 58
+</li>
+<li>
+number of properties: 48
+</li>
+</ul>
+
+<h2>Findings</h2>
+<h3>naming</h3>
+<div class="rule-container">
+<span class="rule">
+MatchingDeclarationName
+</span>
+<span class="description">
+If a source file contains only a single non-private top-level class or object, the file name should reflect the case-sensitive name plus the .kt extension.
+</span>
+</div>
+<ul>
+<li>
+<span class="location">
+C:\Users\Rodrigo\Desktop\CIT\iTunesAPI\app\src\main\java\com\ciandt\book\seeker\util\Helper.kt:1:1
+</span>
+<br />
+<span class="message">
+The file name 'Helper.kt' does not match the name of the single top-level declaration 'Constants'.
+</span>
+</li>
+</ul>
+
+</body>
+</html>
