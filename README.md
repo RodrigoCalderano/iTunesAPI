@@ -1,5 +1,6 @@
 # Kotlin-Android-bookSeeker
 
+
 <p align="center">
     <img src="app/src/main/res/mipmap-xxxhdpi/ic_launcherv2.png" width="200">
 </p>
@@ -28,3 +29,18 @@ An MVVM Android project written in [Kotlin](https://kotlinlang.org/) that consum
 <p align="center">
   <img src="https://i.ibb.co/XjdvWh6/Whats-App-Image-2019-11-11-at-01-11-53-2.jpg" width="300">
 </p>
+
+## [Detekt](https://github.com/arturbosch/detekt)
+<p align="center">
+    <img src="https://i.ibb.co/3Y0VzHw/asd.png">
+</p>
+
+## AppCenter Integration
+<p align="center">
+  <img src="https://i.ibb.co/LdnLxJq/1111.png" width="700">
+  <img src="https://i.ibb.co/XLdWYGQ/222222.png" width="700">
+  <img src="https://i.ibb.co/qYXcrgv/3333.png" width="700">
+</p>
+
+
+
