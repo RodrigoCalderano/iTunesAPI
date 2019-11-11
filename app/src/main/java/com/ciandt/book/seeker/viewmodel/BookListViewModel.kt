@@ -1,8 +1,6 @@
 package com.ciandt.book.seeker.viewmodel
-import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.ciandt.book.seeker.BooksApplication
 import com.ciandt.book.seeker.dao.book.BookServiceDAO
 import com.ciandt.book.seeker.dao.search.SearchServiceDAO
 import com.ciandt.book.seeker.di.DaggerApiComponent
@@ -51,8 +49,8 @@ class BookListViewModel : ViewModel() {
     }
 
     fun downloadData(query: String) {
-        Toast.makeText(BooksApplication.getInstance().applicationContext,
-            "Downloading from API", Toast.LENGTH_SHORT).show()
+//        Toast.makeText(BooksApplication.getInstance().applicationContext,
+//            "Downloading from API", Toast.LENGTH_SHORT).show()
         disposable.add(
             booksService.getApiResponse(query)
                 .subscribeOn(Schedulers.newThread())
@@ -80,8 +78,8 @@ class BookListViewModel : ViewModel() {
     }
 
     private fun getFromDb(query: String) {
-        Toast.makeText(BooksApplication.getInstance().applicationContext,
-            "Getting from DB", Toast.LENGTH_SHORT).show()
+//        Toast.makeText(BooksApplication.getInstance().applicationContext,
+//            "Getting from DB", Toast.LENGTH_SHORT).show()
         doAsync {
             val search = SearchServiceDAO.getSearch(query)
             var booksFromDb = listOf<Book>()
